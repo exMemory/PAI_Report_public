@@ -1,13 +1,13 @@
 """RL-locomotion low layer + scripted strike for the soccer PK environment.
 
-Why this file exists (see FIX_NOTES.md for the full record):
+Why this file exists:
   Fault isolation on 2026-10-25 showed the hierarchical controller's baked-in
   single-leg SHIFT_WEIGHT posture falls by itself in ~1 s, while Unitree's
   official RL locomotion policy (g1_rl_locomotion.py + motion.pt) stands for
   10 s at zero command and walks stably in this same MJCF.  The AI decision
   layers (VLA / Gemini / Jev) therefore never had a working base to command.
 
-Design (hybrid, after two measured dead ends -- see FIX_NOTES.md):
+Design (hybrid, after two measured dead ends):
   * Approach + balance: the RL policy, driven by gentle velocity commands.
     A hip-pitch "boost" bias on top of the policy targets was tried first
     (test_rl_walk.py style): contact happened but ball speed peaked at

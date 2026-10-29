@@ -108,50 +108,12 @@ API 契約・待ち時間・蹴り直しのテストはモックです。
 摩擦テストは実際の MuJoCo の接触計算を使用し、動画テストはローカルで描画・
 エンコード・全フレームのデコード検証を行います。実 API の疎通テストではありません。
 
-整理時の検証には既存の Python 3.11.9 環境を使用しています。
-主要バージョンは MuJoCo 3.16.0 / NumPy 2.4.6 / OpenCV 5.0.0.93 /
+動作確認環境（Python 3.11.9）の主要パッケージバージョンは
+MuJoCo 3.16.0 / NumPy 2.4.6 / OpenCV 5.0.0.93 /
 imageio 2.38.1 / imageio-ffmpeg 0.6.0 / Pillow 13.0.0 /
 google-genai 2.31.0 / openai 3.35.1 です。
-新規環境へのインストールと実 API 呼び出しは整理時には行っていません。
-
-確認結果（2026-10-29）:
-
-- オフラインテスト28件成功（動画テストで imageio の `ResourceWarning` が発生）。
-- 参照方策を最終ルールで実行し、3回のキック、25.952秒で得点、転倒なし。
-- 録画・再試行・グリッド合成の CLI と SDK の import、ローカル FFmpeg を確認。
-- 公開対象49ファイル、約24.33 MiB。MJCF が参照する27メッシュの過不足なし。
-- `.env`、出力、旧コードなど16パターンの除外と `git add --dry-run` を確認。
-- Gemini / Jev の実 API と、新しい5試行の実録画・グリッド動画の全生成は未実施。
-
-## 公開前の確認
-
-このフォルダーは元の `.git` をコピーせず `main` ブランチで新規初期化しています。
-**元リポジトリの履歴は削除・浄化していません。**
-過去のファイルを公開したくない場合、元リポジトリを public にせず、
-GitHub に別の空リポジトリを作成して、このフォルダーから PUSH してください。
-すでに公開された履歴や第三者のコピーを、この整理で取り消すことはできません。
-
-[.gitignore](.gitignore) は許可リスト方式です。今後追加するファイルは、
-必要なものだけ例外に追加してください。`git add -f` は使用しないでください。
-許可済みソース内にキーを書いた場合までは防げないため、差分も確認してください。
-
-```powershell
-git status --short --untracked-files=all
-git add --dry-run .
-# 表示された公開対象を確認してから実行
-git add .
-git diff --cached --stat
-git commit -m "Initial submission" -m "Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
-# URL は新規作成した空の提出用リポジトリに置き換える
-git remote add origin https://github.com/<account>/<new-submission-repository>.git
-git push -u origin main
-```
-
-公開時の Git 著者名・メールアドレスも確認し、必要なら GitHub の noreply
-アドレスを設定してください。この整理ではコミット・リモート設定・PUSH は未実施です。
 
 ## ライセンス
 
 同梱資産の出典とライセンスは [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) と
 [Unitree LICENSE](assets/unitree_g1/LICENSE) を参照してください。
-既存のライセンス表示を保持しています。整理時のオンライン再調査は行っていません。

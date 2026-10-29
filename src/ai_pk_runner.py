@@ -1,6 +1,6 @@
 """Closed-loop decision interface on top of the RL low layer.
 
-Background (see FIX_NOTES.md section 6): with the original design the AI
+Background: with the original design the AI
 decided ONCE per episode and its decision was held -- an open loop on a
 base that fell in ~1 s.  Now that the RL low layer keeps the robot upright,
 the decision layer can work the way the assignment intends: observe the
